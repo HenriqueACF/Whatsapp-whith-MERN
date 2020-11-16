@@ -8,12 +8,13 @@ import Chat from './Chat';
 function App() {
   return (
     <div className="App">
+      <div className="app__body">
+        {/* SideBar */}
+        <SideBar />
 
-      {/* SideBar */}
-      <SideBar />
-
-      {/* ChatComponent */}
-      <Chat />
+          {/* ChatComponent */}
+          <Chat />
+      </div>
     </div>
   );
 }
