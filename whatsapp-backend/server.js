@@ -2,6 +2,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import Messages from './dbMessages.js';
+import Pusher from 'pusher';
 
 //app config
 const app = express();
@@ -26,7 +27,11 @@ mongoose.connect(connection_url,{
     useUnifiedTopology:true
 })
 
-// ??
+const db = mongoose.connection;
+
+db.once('open', () => {
+    console.log('DB CONNECTED!!!');
+});
 
 //api routes
 app.get('/', (req, res) => res.status(200).send('Hello World'));
