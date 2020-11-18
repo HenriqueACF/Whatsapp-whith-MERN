@@ -7,15 +7,18 @@ import SideBar from './Sidebar';
 import Chat from './Chat';
 
 
-
 function App() {
+
+  useEffect(() => {
+
+  }, [])
 
   useEffect(()=>{
     const pusher = new Pusher('a582f519bac68a7650ad', {
       cluster: 'us2'
     });
 
-    const channel = pusher.subscribe('my-channel');
+    const channel = pusher.subscribe('messages');
     channel.bind('inserted', (data)=> {
       alert(JSON.stringify(data));
     });
