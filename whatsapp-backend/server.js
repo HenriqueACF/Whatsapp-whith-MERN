@@ -3,6 +3,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import Messages from './dbMessages.js';
 import Pusher from 'pusher';
+import cors from 'cors';
 
 //app config
 const app = express();
@@ -17,13 +18,8 @@ const pusher = new Pusher({
   });
 
 //middleware
-app.use(express.json())
-
-app.use((req, res, next)=>{
-    res.setHeader('Acess-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', '*');
-    next();
-})
+app.use(express.json());
+app.use(cors())
 
 //DB config
 const connection_url = 'mongodb+srv://admin:admin@cluster0.ldkms.mongodb.net/test';
