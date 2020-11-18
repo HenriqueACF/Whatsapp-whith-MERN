@@ -19,6 +19,12 @@ const pusher = new Pusher({
 //middleware
 app.use(express.json())
 
+app.use((req, res, next)=>{
+    res.setHeader('Acess-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', '*');
+    next();
+})
+
 //DB config
 const connection_url = 'mongodb+srv://admin:admin@cluster0.ldkms.mongodb.net/test';
 mongoose.connect(connection_url,{
