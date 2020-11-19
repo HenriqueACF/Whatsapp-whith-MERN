@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Chat.css';
 
 //axios
-import axios from 'axios';
+import axios from './axios';
 
 //material ui
 import { Avatar, IconButton } from '@material-ui/core';
@@ -14,18 +14,22 @@ function Chat({ messages }) {
 
     const [input, setInput ] = useState('')
 
-    const sendMessage = async (e)=>{
+    const sendMessage = async (e) => {
         e.preventDefault();
-
-        await axios.post('/messages/new', {
-            message: input,
-            name:"Teste",
-            timestamp:"Just now!",
-            received:false
-        });
-
-        setInput('')
-    }
+        // if no input and hit 'Enter' then do nothing
+        if(input === ''){
+            return;
+        } else {
+            await axios.post('/messages/new',{
+                message: input,
+                name: 'Demo App',
+                timestamp: 'Just Now',
+                received: true,
+            });
+        }
+        //clear input folder
+        setInput('');
+    };
 
   return( 
     <div className="chat">
@@ -53,7 +57,7 @@ function Chat({ messages }) {
         </div>
 
         <div className="chat__body">
-            {messages.map((message) =>(
+            {messages?.map((message) =>(
                 
             <p className={`chat_message 
                     ${message.received  
